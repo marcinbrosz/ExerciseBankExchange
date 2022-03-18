@@ -1,4 +1,5 @@
 using ExerciseBankExchange.Controllers;
+using ExerciseBankExchange.Dtos;
 using ExerciseBankExchange.Entities.Models;
 using ExerciseBankExchange.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace ExerciseBankExchange.Tests
 
             accountService
                 .Setup(x => x.GetAccount(It.IsAny<int>()))
-                .ReturnsAsync(new Account() { Id = 2 });
+                .ReturnsAsync(new AccountDto() { Id = 2 });
 
             nbpService
                 .Setup(x => x.ExchangePlnToEuro(It.IsAny<double>()))

@@ -1,4 +1,6 @@
-﻿using ExerciseBankExchange.Entities.DbContextss;
+﻿using AutoMapper;
+using ExerciseBankExchange.Dtos;
+using ExerciseBankExchange.Entities.DbContextss;
 using ExerciseBankExchange.Entities.Models;
 using ExerciseBankExchange.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -12,22 +14,27 @@ namespace ExerciseBankExchange.Services
     public class AccountService: IAccountService
     {
         private readonly AccountContext _accountContext;
+        private readonly IMapper _mapper;
 
-        public AccountService(AccountContext accountContext)
+        public AccountService(AccountContext accountContext, IMapper mapper)
         {
             _accountContext = accountContext;
+            _mapper = mapper;
         }
-        public async Task<Account> GetAccount(int id)
-            => await _accountContext.Accounts
-            .Include(c=>c.User)
-            .SingleOrDefaultAsync(x => x.UserId == id);
-
-        public IEnumerable<Account> CreateLocalAccountTable()
+        public async Task<AccountDto> GetAccount(int id)
         {
-            return new List<Account>() { 
-                new Account() { Id=1, User = new User() { Id=1, Name = "John" } },
-                new Account() { Id=2, User = new User() { Id=2, Name = "Eryk" } }, 
-                new Account() { Id=3, User = new User() { Id=2, Name = "Martin" } } 
+            var account = await _accountContext.Accounts
+              .Include(c => c.User)
+              .SingleOrDefaultAsync(x => x.UserId == id);
+            return _mapper.Map<Account, AccountDto>(account);
+        }
+
+        public IEnumerable<AccountDto> CreateLocalAccountTable()
+        {
+            return new List<AccountDto>() { 
+                new AccountDto() { Id=1, User = new UserDto() { Id=1, Name = "John" } },
+                new AccountDto() { Id=2, User = new UserDto() { Id=2, Name = "Eryk" } }, 
+                new AccountDto() { Id=3, User = new UserDto() { Id=2, Name = "Martin" } } 
             };
         }
     }

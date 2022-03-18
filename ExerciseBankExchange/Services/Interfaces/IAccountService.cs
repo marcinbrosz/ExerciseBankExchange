@@ -1,4 +1,5 @@
-﻿using ExerciseBankExchange.Entities.Models;
+﻿using ExerciseBankExchange.Dtos;
+using ExerciseBankExchange.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace ExerciseBankExchange.Services.Interfaces
 {
     public interface IAccountService
     {
-        Task<Account> GetAccount(int id);
-        IEnumerable<Account> CreateLocalAccountTable();
+        Task<AccountDto> GetAccount(int id);
+        IEnumerable<AccountDto> CreateLocalAccountTable();
     }
 }

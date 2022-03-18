@@ -1,4 +1,5 @@
-﻿using ExerciseBankExchange.Entities.Models;
+﻿using AutoMapper;
+using ExerciseBankExchange.Entities.Models;
 using ExerciseBankExchange.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
