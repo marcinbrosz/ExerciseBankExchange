@@ -13,7 +13,7 @@ namespace ExerciseBankExchange.Tests
         }
 
         [Test]
-        public async System.Threading.Tasks.Task TestResultBadRequestResult2Async()
+        public async System.Threading.Tasks.Task TestExchangePlnToEuro()
         {
             var mockLogger = new Mock<ILogger<NbpService>>();
 
@@ -22,5 +22,6 @@ namespace ExerciseBankExchange.Tests
 
             Assert.AreEqual(106.66, result);
         }
+
     }
 }

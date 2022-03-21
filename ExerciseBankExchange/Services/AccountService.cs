@@ -32,9 +32,9 @@ namespace ExerciseBankExchange.Services
         public IEnumerable<AccountDto> CreateLocalAccountTable()
         {
             return new List<AccountDto>() { 
-                new AccountDto() { Id=1, User = new UserDto() { Id=1, Name = "John" } },
-                new AccountDto() { Id=2, User = new UserDto() { Id=2, Name = "Eryk" } }, 
-                new AccountDto() { Id=3, User = new UserDto() { Id=2, Name = "Martin" } } 
+                new AccountDto() { Id=1, User = new UserDto() { Id=1, Name = "John" }, SaldoPl=100 },
+                new AccountDto() { Id=2, User = new UserDto() { Id=2, Name = "Eryk" }, SaldoPl=500 }, 
+                new AccountDto() { Id=3, User = new UserDto() { Id=2, Name = "Martin" }, SaldoPl=1000 } 
             };
         }
     }
