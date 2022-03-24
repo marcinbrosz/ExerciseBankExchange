@@ -36,7 +36,7 @@ namespace ExerciseBankExchange.Tests
         [Test]
         public void TestResultOkObjectResult()
         {
-            var result = _accountController.GetAsync(2).Result;
+            var result = _accountController.GetEuroSaldoAsync(2).Result;
             Assert.IsAssignableFrom<OkObjectResult>(result);
         }
 
@@ -44,7 +44,7 @@ namespace ExerciseBankExchange.Tests
         public void TestResultBadRequestResult()
         {
             _accountController.ModelState.AddModelError("Name", "Required");
-            var result = _accountController.GetAsync(2).Result;
+            var result = _accountController.GetEuroSaldoAsync(2).Result;
             Assert.IsAssignableFrom<BadRequestObjectResult>(result);
         }
 

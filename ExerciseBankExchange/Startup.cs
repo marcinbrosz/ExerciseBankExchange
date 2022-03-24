@@ -26,8 +26,8 @@ namespace ExerciseBankExchange
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<INbpService, NbpService>();
+            services.AddSingleton<IAccountService, AccountService>();
+            services.AddSingleton<INbpService, NbpService>();
             services.AddDbContext<AccountContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("MyConnectionString")));
             services.AddControllers();
         }

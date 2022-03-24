@@ -24,7 +24,7 @@ namespace ExerciseBankExchange.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetEuroSaldoAsync(int id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
