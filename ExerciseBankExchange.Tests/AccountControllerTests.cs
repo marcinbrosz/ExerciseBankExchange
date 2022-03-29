@@ -19,18 +19,18 @@ namespace ExerciseBankExchange.Tests
             decimal returnValue = 123;
             var mockLogger = new Mock<ILogger<AccountController>>();
             var accountService = new Mock<IAccountService>();
-            var nbpService = new Mock<INbpService>();
+            var exchanger = new Mock<IExchanger>();
 
             accountService
                 .Setup(x => x.GetAccount(It.IsAny<int>()))
                 .ReturnsAsync(new AccountDto() { Id = 2 });
 
-            nbpService
+            exchanger
                 .Setup(x => x.ExchangePlnToEuro(It.IsAny<double>()))
                 .ReturnsAsync(returnValue);
 
             _accountController
-                = new AccountController(mockLogger.Object, accountService.Object, nbpService.Object);
+                = new AccountController(mockLogger.Object, accountService.Object, exchanger.Object);
         }
 
         [Test]

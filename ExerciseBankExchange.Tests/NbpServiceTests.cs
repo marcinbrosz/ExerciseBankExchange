@@ -1,4 +1,5 @@
 ﻿using ExerciseBankExchange.Services;
+using ExerciseBankExchange.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
@@ -15,10 +16,11 @@ namespace ExerciseBankExchange.Tests
         [Test]
         public async System.Threading.Tasks.Task TestExchangePlnToEuro()
         {
-            var mockLogger = new Mock<ILogger<NbpService>>();
+            var mockLogger = new Mock<ILogger<Exchanger>>();
+            var nbpService = new Mock<INbpService>();
 
-            var nbpService = new NbpService(mockLogger.Object);
-            var result = await nbpService.ExchangePlnToEuro(500);
+            var exchanger = new Exchanger(mockLogger.Object, nbpService.Object);
+            var result = await exchanger.ExchangePlnToEuro(500);
 
             Assert.AreEqual(106.66, result);
         }
