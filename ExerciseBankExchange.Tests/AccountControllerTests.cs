@@ -16,7 +16,7 @@ namespace ExerciseBankExchange.Tests
         [SetUp]
         public void Setup()
         {
-            double returnValue = 123;
+            decimal returnValue = 123;
             var mockLogger = new Mock<ILogger<AccountController>>();
             var accountService = new Mock<IAccountService>();
             var nbpService = new Mock<INbpService>();

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ExerciseBankExchange.Services.Interfaces
 {
-    public interface INbpService
+    public interface IExchanger
     {
-        public Task<NbpTable> GetNbpEuroRate();
+        public Task<decimal> ExchangePlnToEuro(double saldePln);
     }
 }

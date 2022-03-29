@@ -11,15 +11,15 @@ namespace ExerciseBankExchange.Controllers
     {
         private readonly ILogger<AccountController> _logger;
         private readonly IAccountService _accountService;
-        private readonly INbpService _nbpService;
+        private readonly IExchanger _exchanger;
 
         public AccountController(
             ILogger<AccountController> logger, 
             IAccountService accountService,
-            INbpService nbpService )
+            IExchanger exchanger )
         {
             _accountService = accountService;
-            _nbpService = nbpService;
+            _exchanger = exchanger;
             _logger = logger;
         }
 
@@ -30,7 +30,7 @@ namespace ExerciseBankExchange.Controllers
                 return BadRequest(ModelState);
 
             var account = await _accountService.GetAccount(id);
-            var saldeEuro = await _nbpService.ExchangePlnToEuro(account.SaldoPl);//local table-> _accountService.CreateLocalAccountTable()
+            var saldeEuro = await _exchanger.ExchangePlnToEuro(account.SaldoPl);//local table-> _accountService.CreateLocalAccountTable()
 
             return Ok($"{saldeEuro} EUR");
         }

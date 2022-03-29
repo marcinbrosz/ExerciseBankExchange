@@ -21,13 +21,6 @@ namespace ExerciseBankExchange.Services
         {
             _logger = logger;
         }
-        public async Task<double> ExchangePlnToEuro(double saldePln)
-        {
-            var euroRate = await GetNbpEuroRate();
-            var saldeEuro = saldePln / euroRate.rates.FirstOrDefault().mid;
-
-            return Math.Round(saldeEuro, 2, MidpointRounding.AwayFromZero);
-        }
         public async Task<NbpTable> GetNbpEuroRate()
         {
             NbpTable nbpTable = new NbpTable();
