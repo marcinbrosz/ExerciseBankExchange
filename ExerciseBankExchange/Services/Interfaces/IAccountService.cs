@@ -1,5 +1,4 @@
-﻿using ExerciseBankExchange.Dtos;
-using ExerciseBankExchange.Entities.Models;
+﻿using ExerciseBankExchange.Models.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

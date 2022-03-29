@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace ExerciseBankExchange.Entities.Models
-{
+namespace ExerciseBankExchange.Models
+{ 
     public class NbpTable
     {
         public string table { get; set; }

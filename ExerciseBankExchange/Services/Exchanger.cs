@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ExerciseBankExchange.Entities.Models;
 using ExerciseBankExchange.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -15,18 +14,22 @@ namespace ExerciseBankExchange.Services
     {
         private readonly ILogger<Exchanger> _logger;
         private readonly INbpService _nbpService;
+        private readonly IAccountService _accountService;
 
-        public Exchanger(ILogger<Exchanger> logger, INbpService nbpService)
+        public Exchanger(ILogger<Exchanger> logger, INbpService nbpService, IAccountService accountService)
         {
             _logger = logger;
             _nbpService = nbpService;
+            _accountService = accountService;
         }
-        public async Task<decimal> ExchangePlnToEuro(double saldePln)
+        public async Task<decimal> ExchangePlnToEuro(int id)
         {
+            _logger.LogInformation($"Log message in the ExchangePlnToEuro({id})() method");
+            var account = await _accountService.GetAccount(id);
             var euroRate = await _nbpService.GetNbpEuroRate();
-            var saldeEuro = saldePln / euroRate.rates.FirstOrDefault().mid;
-
-            return (decimal)Math.Round(saldeEuro, 2, MidpointRounding.AwayFromZero);
+            var saldeEuro = (decimal)account.SaldoPl / euroRate.rates.FirstOrDefault().mid;
+           
+            return Math.Round(saldeEuro, 2, MidpointRounding.AwayFromZero);
         }
     }
 }

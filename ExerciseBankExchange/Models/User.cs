@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ExerciseBankExchange.Dtos
+namespace ExerciseBankExchange.Models
 {
-    public class UserDto
+    public class User
     {
         public int Id { get; set; }
         [Required]

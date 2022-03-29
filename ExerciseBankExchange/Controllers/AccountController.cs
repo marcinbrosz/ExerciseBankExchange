@@ -10,15 +10,12 @@ namespace ExerciseBankExchange.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ILogger<AccountController> _logger;
-        private readonly IAccountService _accountService;
         private readonly IExchanger _exchanger;
 
         public AccountController(
             ILogger<AccountController> logger, 
-            IAccountService accountService,
             IExchanger exchanger )
         {
-            _accountService = accountService;
             _exchanger = exchanger;
             _logger = logger;
         }
@@ -26,11 +23,11 @@ namespace ExerciseBankExchange.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEuroSaldoAsync(int id)
         {
+            _logger.LogInformation($"Log message in the GetEuroSaldoAsync({id})() method");
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var account = await _accountService.GetAccount(id);
-            var saldeEuro = await _exchanger.ExchangePlnToEuro(account.SaldoPl);//local table-> _accountService.CreateLocalAccountTable()
+            var saldeEuro = await _exchanger.ExchangePlnToEuro(id);
 
             return Ok($"{saldeEuro} EUR");
         }

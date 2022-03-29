@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ExerciseBankExchange.Dtos
+namespace ExerciseBankExchange.Models
 {
-    public class AccountDto
+    public class Account
     {
         public int Id { get; set; }
-        public UserDto User { get; set; }
+        public User User { get; set; }
         [Required]
         [Display(Name = "User Id")]
         public int UserId { get; set; }

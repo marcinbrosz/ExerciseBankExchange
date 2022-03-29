@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
+using System;
 
 namespace ExerciseBankExchange
 {
@@ -25,10 +26,14 @@ namespace ExerciseBankExchange
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient("NbpRate170322", c =>
+            {
+                c.BaseAddress = new Uri("https://api.nbp.pl/api/exchangerates/rates/a/eur/2022-03-17/?format=json");
+            });
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IAccountService, AccountService>();
-            services.AddSingleton<INbpService, NbpService>();
-            services.AddSingleton<IExchanger, Exchanger>();
+            services.AddScoped<INbpService, NbpService>();
+            services.AddScoped<IExchanger, Exchanger>();
             services.AddDbContext<AccountContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("MyConnectionString")));
             services.AddControllers();
         }

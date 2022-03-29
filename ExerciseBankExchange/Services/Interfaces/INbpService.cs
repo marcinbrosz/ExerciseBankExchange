@@ -1,4 +1,4 @@
-﻿using ExerciseBankExchange.Entities.Models;
+﻿using ExerciseBankExchange.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

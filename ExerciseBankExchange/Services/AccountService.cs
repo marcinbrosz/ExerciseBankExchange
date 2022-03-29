@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using ExerciseBankExchange.Dtos;
 using ExerciseBankExchange.Entities.DbContextss;
-using ExerciseBankExchange.Entities.Models;
+using ExerciseBankExchange.Models;
+using ExerciseBankExchange.Models.Dtos;
 using ExerciseBankExchange.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,19 +14,27 @@ namespace ExerciseBankExchange.Services
 {
     public class AccountService: IAccountService
     {
+        private readonly ILogger<AccountService> _logger;
         private readonly AccountContext _accountContext;
         private readonly IMapper _mapper;
 
-        public AccountService(AccountContext accountContext, IMapper mapper)
+        public AccountService(ILogger<AccountService> logger, AccountContext accountContext, IMapper mapper)
         {
+            _logger = logger;
             _accountContext = accountContext;
             _mapper = mapper;
         }
         public async Task<AccountDto> GetAccount(int id)
         {
+            _logger.LogInformation($"Log message in the GetAccount({id})() method");
+
             var account = await _accountContext.Accounts
               .Include(c => c.User)
               .SingleOrDefaultAsync(x => x.UserId == id);
+
+            if(account == null)
+                _logger.LogInformation($"Account({id}) not found.");
+
             return _mapper.Map<Account, AccountDto>(account);
         }
 

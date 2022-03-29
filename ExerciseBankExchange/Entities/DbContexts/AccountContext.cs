@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExerciseBankExchange.Models;
 using Microsoft.EntityFrameworkCore;
-using ExerciseBankExchange.Entities.Models;
+
 
 namespace ExerciseBankExchange.Entities.DbContextss
 {
